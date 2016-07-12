@@ -7,6 +7,7 @@
 
 import React, {PropTypes} from 'react'
 import Marker from './potentiometer-marker'
+import Knob from './potentiometer-knob'
 
 /**
  * a radial slider/knob UI component.
@@ -28,6 +29,8 @@ import Marker from './potentiometer-marker'
  *        a label text
  */
 const Poti = (props) => {
+  const {markers, min, max, step, value, onChange, name} = props
+
   /**
    * a function to return the markers
    * @param  {Object} props otions
@@ -43,7 +46,6 @@ const Poti = (props) => {
    * @return {Array} returns a list of markers
    */
   const getMarkers = () => {
-    const {markers, min, max, step, value} = props
     const steps = Math.round((max - min) / step)
     const arr = []
     for (let i = 0; i <= steps; i++) {
@@ -65,18 +67,18 @@ const Poti = (props) => {
   return (
     <label className='poti'>
       <div className='knob-wrapper'>
-        <div className='knob'> knob </div>
+        <Knob rotation={value}/>
         <div className='markers'>
           {getMarkers()} </div>
       </div>
       {props.children}
       <input type='range'
-             min={props.min}
-             max={props.max}
-             step={props.step}
-             name={props.name}
-             onChange={props.onChange}
-             value={Number(props.value)}/> </label>
+             min={min}
+             max={max}
+             step={step}
+             name={name}
+             onChange={onChange}
+             value={Number(value)}/> </label>
   )
 }
 

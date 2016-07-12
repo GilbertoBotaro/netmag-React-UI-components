@@ -26,8 +26,7 @@ const Marker = (props) => {
     <div className='marker' style={style}>
       <div>
         <div className='marker-inner'>
-          {label} 
-        </div>
+          {label} </div>
       </div>
     </div>
   )
