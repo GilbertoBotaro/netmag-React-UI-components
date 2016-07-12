@@ -473,10 +473,10 @@ require("./browser.js", entryId$$);
     "source": "var hashClear = require('./_hashClear'),\n    hashDelete = require('./_hashDelete'),\n    hashGet = require('./_hashGet'),\n    hashHas = require('./_hashHas'),\n    hashSet = require('./_hashSet');\n\n/**\n * Creates a hash object.\n *\n * @private\n * @constructor\n * @param {Array} [entries] The key-value pairs to cache.\n */\nfunction Hash(entries) {\n  var index = -1,\n      length = entries ? entries.length : 0;\n\n  this.clear();\n  while (++index < length) {\n    var entry = entries[index];\n    this.set(entry[0], entry[1]);\n  }\n}\n\n// Add methods to `Hash`.\nHash.prototype.clear = hashClear;\nHash.prototype['delete'] = hashDelete;\nHash.prototype.get = hashGet;\nHash.prototype.has = hashHas;\nHash.prototype.set = hashSet;\n\nmodule.exports = Hash;\n",
     "deps": {
       "./_hashDelete": 96,
-      "./_hashHas": 98,
       "./_hashSet": 99,
       "./_hashClear": 95,
-      "./_hashGet": 97
+      "./_hashGet": 97,
+      "./_hashHas": 98
     },
     "hash": "c528d5ef7f249597e9f4df1d8212ecc2"
   },
@@ -487,10 +487,10 @@ require("./browser.js", entryId$$);
     "source": "var listCacheClear = require('./_listCacheClear'),\n    listCacheDelete = require('./_listCacheDelete'),\n    listCacheGet = require('./_listCacheGet'),\n    listCacheHas = require('./_listCacheHas'),\n    listCacheSet = require('./_listCacheSet');\n\n/**\n * Creates an list cache object.\n *\n * @private\n * @constructor\n * @param {Array} [entries] The key-value pairs to cache.\n */\nfunction ListCache(entries) {\n  var index = -1,\n      length = entries ? entries.length : 0;\n\n  this.clear();\n  while (++index < length) {\n    var entry = entries[index];\n    this.set(entry[0], entry[1]);\n  }\n}\n\n// Add methods to `ListCache`.\nListCache.prototype.clear = listCacheClear;\nListCache.prototype['delete'] = listCacheDelete;\nListCache.prototype.get = listCacheGet;\nListCache.prototype.has = listCacheHas;\nListCache.prototype.set = listCacheSet;\n\nmodule.exports = ListCache;\n",
     "deps": {
       "./_listCacheClear": 111,
-      "./_listCacheSet": 115,
       "./_listCacheGet": 113,
       "./_listCacheDelete": 112,
-      "./_listCacheHas": 114
+      "./_listCacheHas": 114,
+      "./_listCacheSet": 115
     },
     "hash": "d00ac27f0067e63b0b6bc5a8d06fcd85"
   },
@@ -511,10 +511,10 @@ require("./browser.js", entryId$$);
     "file": "/Users/pixelass/Workspace/netmag/poti-tutorial/node_modules/lodash/_MapCache.js",
     "source": "var mapCacheClear = require('./_mapCacheClear'),\n    mapCacheDelete = require('./_mapCacheDelete'),\n    mapCacheGet = require('./_mapCacheGet'),\n    mapCacheHas = require('./_mapCacheHas'),\n    mapCacheSet = require('./_mapCacheSet');\n\n/**\n * Creates a map cache object to store key-value pairs.\n *\n * @private\n * @constructor\n * @param {Array} [entries] The key-value pairs to cache.\n */\nfunction MapCache(entries) {\n  var index = -1,\n      length = entries ? entries.length : 0;\n\n  this.clear();\n  while (++index < length) {\n    var entry = entries[index];\n    this.set(entry[0], entry[1]);\n  }\n}\n\n// Add methods to `MapCache`.\nMapCache.prototype.clear = mapCacheClear;\nMapCache.prototype['delete'] = mapCacheDelete;\nMapCache.prototype.get = mapCacheGet;\nMapCache.prototype.has = mapCacheHas;\nMapCache.prototype.set = mapCacheSet;\n\nmodule.exports = MapCache;\n",
     "deps": {
-      "./_mapCacheGet": 118,
       "./_mapCacheSet": 120,
       "./_mapCacheDelete": 117,
       "./_mapCacheHas": 119,
+      "./_mapCacheGet": 118,
       "./_mapCacheClear": 116
     },
     "hash": "e83fbd89a4da5691f6c1fee95679693b"
@@ -805,9 +805,9 @@ require("./browser.js", entryId$$);
     "deps": {
       "./identity": 143,
       "./isArray": 145,
-      "./_baseMatchesProperty": 71,
+      "./property": 157,
       "./_baseMatches": 70,
-      "./property": 157
+      "./_baseMatchesProperty": 71
     },
     "hash": "c0afffd453201ac29e0ca75e0c7e1842"
   },
@@ -838,12 +838,12 @@ require("./browser.js", entryId$$);
     "source": "var baseIsEqual = require('./_baseIsEqual'),\n    get = require('./get'),\n    hasIn = require('./hasIn'),\n    isKey = require('./_isKey'),\n    isStrictComparable = require('./_isStrictComparable'),\n    matchesStrictComparable = require('./_matchesStrictComparable'),\n    toKey = require('./_toKey');\n\n/** Used to compose bitmasks for comparison styles. */\nvar UNORDERED_COMPARE_FLAG = 1,\n    PARTIAL_COMPARE_FLAG = 2;\n\n/**\n * The base implementation of `_.matchesProperty` which doesn't clone `srcValue`.\n *\n * @private\n * @param {string} path The path of the property to get.\n * @param {*} srcValue The value to match.\n * @returns {Function} Returns the new spec function.\n */\nfunction baseMatchesProperty(path, srcValue) {\n  if (isKey(path) && isStrictComparable(srcValue)) {\n    return matchesStrictComparable(toKey(path), srcValue);\n  }\n  return function(object) {\n    var objValue = get(object, path);\n    return (objValue === undefined && objValue === srcValue)\n      ? hasIn(object, path)\n      : baseIsEqual(srcValue, objValue, undefined, UNORDERED_COMPARE_FLAG | PARTIAL_COMPARE_FLAG);\n  };\n}\n\nmodule.exports = baseMatchesProperty;\n",
     "deps": {
       "./_matchesStrictComparable": 122,
-      "./_toKey": 134,
       "./_isKey": 106,
       "./_isStrictComparable": 110,
-      "./get": 141,
+      "./_toKey": 134,
       "./hasIn": 142,
-      "./_baseIsEqual": 64
+      "./_baseIsEqual": 64,
+      "./get": 141
     },
     "hash": "fb7995afc1aa6260060b1593a9a5ecd2"
   },
@@ -956,9 +956,9 @@ require("./browser.js", entryId$$);
     "file": "/Users/pixelass/Workspace/netmag/poti-tutorial/node_modules/lodash/_createFind.js",
     "source": "var baseIteratee = require('./_baseIteratee'),\n    isArrayLike = require('./isArrayLike'),\n    keys = require('./keys');\n\n/**\n * Creates a `_.find` or `_.findLast` function.\n *\n * @private\n * @param {Function} findIndexFunc The function to find the collection index.\n * @returns {Function} Returns the new find function.\n */\nfunction createFind(findIndexFunc) {\n  return function(collection, predicate, fromIndex) {\n    var iterable = Object(collection);\n    predicate = baseIteratee(predicate, 3);\n    if (!isArrayLike(collection)) {\n      var props = keys(collection);\n    }\n    var index = findIndexFunc(props || collection, function(value, key) {\n      if (props) {\n        key = value;\n        value = iterable[key];\n      }\n      return predicate(value, key, iterable);\n    }, fromIndex);\n    return index > -1 ? collection[props ? props[index] : index] : undefined;\n  };\n}\n\nmodule.exports = createFind;\n",
     "deps": {
-      "./_baseIteratee": 68,
       "./isArrayLike": 146,
-      "./keys": 155
+      "./keys": 155,
+      "./_baseIteratee": 68
     },
     "hash": "a1a6178472f142346d5a055aee745b69"
   },
@@ -1521,8 +1521,8 @@ require("./browser.js", entryId$$);
     "file": "/Users/pixelass/Workspace/netmag/poti-tutorial/node_modules/lodash/find.js",
     "source": "var createFind = require('./_createFind'),\n    findIndex = require('./findIndex');\n\n/**\n * Iterates over elements of `collection`, returning the first element\n * `predicate` returns truthy for. The predicate is invoked with three\n * arguments: (value, index|key, collection).\n *\n * @static\n * @memberOf _\n * @since 0.1.0\n * @category Collection\n * @param {Array|Object} collection The collection to search.\n * @param {Array|Function|Object|string} [predicate=_.identity]\n *  The function invoked per iteration.\n * @param {number} [fromIndex=0] The index to search from.\n * @returns {*} Returns the matched element, else `undefined`.\n * @example\n *\n * var users = [\n *   { 'user': 'barney',  'age': 36, 'active': true },\n *   { 'user': 'fred',    'age': 40, 'active': false },\n *   { 'user': 'pebbles', 'age': 1,  'active': true }\n * ];\n *\n * _.find(users, function(o) { return o.age < 40; });\n * // => object for 'barney'\n *\n * // The `_.matches` iteratee shorthand.\n * _.find(users, { 'age': 1, 'active': true });\n * // => object for 'pebbles'\n *\n * // The `_.matchesProperty` iteratee shorthand.\n * _.find(users, ['active', false]);\n * // => object for 'fred'\n *\n * // The `_.property` iteratee shorthand.\n * _.find(users, 'active');\n * // => object for 'barney'\n */\nvar find = createFind(findIndex);\n\nmodule.exports = find;\n",
     "deps": {
-      "./_createFind": 83,
-      "./findIndex": 140
+      "./findIndex": 140,
+      "./_createFind": 83
     },
     "hash": "56b7c4cc5582437c0b71acaf5e92539c"
   },
@@ -1533,8 +1533,8 @@ require("./browser.js", entryId$$);
     "source": "var baseFindIndex = require('./_baseFindIndex'),\n    baseIteratee = require('./_baseIteratee'),\n    toInteger = require('./toInteger');\n\n/* Built-in method references for those with the same name as other `lodash` methods. */\nvar nativeMax = Math.max;\n\n/**\n * This method is like `_.find` except that it returns the index of the first\n * element `predicate` returns truthy for instead of the element itself.\n *\n * @static\n * @memberOf _\n * @since 1.1.0\n * @category Array\n * @param {Array} array The array to search.\n * @param {Array|Function|Object|string} [predicate=_.identity]\n *  The function invoked per iteration.\n * @param {number} [fromIndex=0] The index to search from.\n * @returns {number} Returns the index of the found element, else `-1`.\n * @example\n *\n * var users = [\n *   { 'user': 'barney',  'active': false },\n *   { 'user': 'fred',    'active': false },\n *   { 'user': 'pebbles', 'active': true }\n * ];\n *\n * _.findIndex(users, function(o) { return o.user == 'barney'; });\n * // => 0\n *\n * // The `_.matches` iteratee shorthand.\n * _.findIndex(users, { 'user': 'fred', 'active': false });\n * // => 1\n *\n * // The `_.matchesProperty` iteratee shorthand.\n * _.findIndex(users, ['active', false]);\n * // => 0\n *\n * // The `_.property` iteratee shorthand.\n * _.findIndex(users, 'active');\n * // => 2\n */\nfunction findIndex(array, predicate, fromIndex) {\n  var length = array ? array.length : 0;\n  if (!length) {\n    return -1;\n  }\n  var index = fromIndex == null ? 0 : toInteger(fromIndex);\n  if (index < 0) {\n    index = nativeMax(length + index, 0);\n  }\n  return baseFindIndex(array, baseIteratee(predicate, 3), index);\n}\n\nmodule.exports = findIndex;\n",
     "deps": {
       "./_baseFindIndex": 58,
-      "./toInteger": 160,
-      "./_baseIteratee": 68
+      "./_baseIteratee": 68,
+      "./toInteger": 160
     },
     "hash": "ccafe2ccdd7dc844e15c2fb3ad41615c"
   },
@@ -1942,8 +1942,8 @@ require("./browser.js", entryId$$);
       "fbjs/lib/ExecutionEnvironment": 2,
       "fbjs/lib/keyOf": 20,
       "./SyntheticEvent": 272,
-      "./EventPluginHub": 189,
-      "./EventPropagators": 192
+      "./EventPropagators": 192,
+      "./EventPluginHub": 189
     },
     "hash": "0222c4dcc3fa07b96893ea5163d78b76"
   },
@@ -2300,8 +2300,8 @@ require("./browser.js", entryId$$);
     "file": "/Users/pixelass/Workspace/netmag/poti-tutorial/node_modules/react/lib/ReactComponentBrowserEnvironment.js",
     "source": "/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n * @providesModule ReactComponentBrowserEnvironment\n */\n\n'use strict';\n\nvar DOMChildrenOperations = require('./DOMChildrenOperations');\nvar ReactDOMIDOperations = require('./ReactDOMIDOperations');\n\n/**\n * Abstracts away all functionality of the reconciler that requires knowledge of\n * the browser context. TODO: These callers should be refactored to avoid the\n * need for this injection.\n */\nvar ReactComponentBrowserEnvironment = {\n\n  processChildrenUpdates: ReactDOMIDOperations.dangerouslyProcessChildrenUpdates,\n\n  replaceNodeWithMarkup: DOMChildrenOperations.dangerouslyReplaceNodeWithMarkup,\n\n  /**\n   * If a particular environment requires that some resources be cleaned up,\n   * specify this in the injected Mixin. In the DOM, we would likely want to\n   * purge any cached node ID lookups.\n   *\n   * @private\n   */\n  unmountIDFromEnvironment: function (rootNodeID) {}\n\n};\n\nmodule.exports = ReactComponentBrowserEnvironment;",
     "deps": {
-      "./DOMChildrenOperations": 179,
-      "./ReactDOMIDOperations": 219
+      "./ReactDOMIDOperations": 219,
+      "./DOMChildrenOperations": 179
     },
     "hash": "9de68e4661b20febf06ffeca9ac8b510"
   },
@@ -2380,8 +2380,8 @@ require("./browser.js", entryId$$);
       "./ReactDOMComponentTree": 213,
       "./ReactUpdates": 263,
       "./getHostComponentFromComposite": 297,
-      "./ReactMount": 248,
       "./ReactReconciler": 258,
+      "./ReactMount": 248,
       "./ReactDefaultInjection": 232
     },
     "hash": "2180cdb3f41e9090f874f811614eeb5e"
@@ -2427,9 +2427,9 @@ require("./browser.js", entryId$$);
       "./ReactDOMButton": 210,
       "./AutoFocusUtils": 173,
       "./ReactDOMOption": 223,
+      "./ReactDOMSelect": 224,
       "./ReactDOMTextarea": 227,
       "./ReactDOMInput": 220,
-      "./ReactDOMSelect": 224,
       "./ReactMultiChild": 249,
       "./ReactServerRenderingTransaction": 260,
       "./CSSPropertyOperations": 176,
@@ -2718,16 +2718,16 @@ require("./browser.js", entryId$$);
       "./DefaultEventPluginOrder": 185,
       "./ReactDOMTreeTraversal": 228,
       "./ReactDefaultBatchingStrategy": 231,
-      "./ChangeEventPlugin": 178,
-      "./ReactReconcileTransaction": 257,
+      "./SelectEventPlugin": 266,
+      "./ReactDOMTextComponent": 226,
       "./ReactEventListener": 238,
       "./EnterLeaveEventPlugin": 187,
       "./ReactInjection": 242,
-      "./ReactComponentBrowserEnvironment": 204,
+      "./ChangeEventPlugin": 178,
       "./BeforeInputEventPlugin": 174,
       "./SimpleEventPlugin": 267,
-      "./SelectEventPlugin": 266,
-      "./ReactDOMTextComponent": 226,
+      "./ReactReconcileTransaction": 257,
+      "./ReactComponentBrowserEnvironment": 204,
       "./ReactDOMComponent": 211
     },
     "hash": "5035db93220c47e3cab633f10c3a2492"
@@ -2930,14 +2930,14 @@ require("./browser.js", entryId$$);
       "fbjs/lib/invariant": 16,
       "fbjs/lib/warning": 26,
       "./ReactElement": 233,
-      "./ReactInstrumentation": 245,
       "./ReactMarkupChecksum": 247,
       "./ReactUpdateQueue": 262,
       "./setInnerHTML": 309,
       "./DOMLazyTree": 180,
       "./ReactDOMContainerInfo": 214,
       "./ReactBrowserEventEmitter": 199,
-      "./instantiateReactComponent": 302
+      "./instantiateReactComponent": 302,
+      "./ReactInstrumentation": 245
     },
     "hash": "579038808d05ee8738868cba26685cfc"
   },
@@ -3068,8 +3068,8 @@ require("./browser.js", entryId$$);
       "_process": 164,
       "./reactProdInvariant": 307,
       "fbjs/lib/invariant": 16,
-      "./ReactRef": 259,
-      "./ReactInstrumentation": 245
+      "./ReactInstrumentation": 245,
+      "./ReactRef": 259
     },
     "hash": "0c891b81d120a9b9585daf56a7774014"
   },
@@ -3729,12 +3729,12 @@ require("./browser.js", entryId$$);
     "id": 316,
     "index": 316,
     "file": "/Users/pixelass/Workspace/netmag/poti-tutorial/src/app.js",
-    "source": "'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _potentiometer = require('./components/potentiometer');\n\nvar _potentiometer2 = _interopRequireDefault(_potentiometer);\n\nfunction _interopRequireDefault(obj) {\n  return obj && obj.__esModule ? obj : { default: obj };\n}\n\n/**\n * a simple App that connects to a Store\n * the App is called with a `state` and an `updtate` function\n * @param  {Object} state - the app state\n * @return {HTMLElement} returns a rendered React component\n */\n/**\n * @module app\n * @author Gregor Adams <greg@pixelass.com>\n */\n\nvar App = function App() {\n  return _react2.default.createElement('div', { className: 'example-app' }, _react2.default.createElement(_potentiometer2.default, { min: 1,\n    max: 7,\n    step: .5,\n    defaultValue: 3,\n    name: 'example-1' }, ' Example 1 '));\n};\n\nexports.default = App;\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7QUFLQTs7OztBQUNBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBUUEsSUFBTSxNQUFNLFNBQU4sQUFBTSxNQUFBO1NBQ1YsZ0JBQUEsY0FBQSxTQUFLLFdBQVUsQUFBZixBQUNFLGlDQUFBLDhCQUFBLFdBQU0sS0FBSyxBQUFYLEFBQ007U0FBSyxBQURYLEFBRU07VUFBTSxBQUZaLEFBR007a0JBQWMsQUFIcEIsQUFJTTtVQUFLLEFBSlgsZUFBQSxBQURGLEFBRFU7QUFBWjs7a0JBVWUsQSIsImZpbGUiOiJhcHAuanMiLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIEBtb2R1bGUgYXBwXG4gKiBAYXV0aG9yIEdyZWdvciBBZGFtcyA8Z3JlZ0BwaXhlbGFzcy5jb20+XG4gKi9cblxuaW1wb3J0IFJlYWN0IGZyb20gJ3JlYWN0J1xuaW1wb3J0IFBvdGkgZnJvbSAnLi9jb21wb25lbnRzL3BvdGVudGlvbWV0ZXInXG5cbi8qKlxuICogYSBzaW1wbGUgQXBwIHRoYXQgY29ubmVjdHMgdG8gYSBTdG9yZVxuICogdGhlIEFwcCBpcyBjYWxsZWQgd2l0aCBhIGBzdGF0ZWAgYW5kIGFuIGB1cGR0YXRlYCBmdW5jdGlvblxuICogQHBhcmFtICB7T2JqZWN0fSBzdGF0ZSAtIHRoZSBhcHAgc3RhdGVcbiAqIEByZXR1cm4ge0hUTUxFbGVtZW50fSByZXR1cm5zIGEgcmVuZGVyZWQgUmVhY3QgY29tcG9uZW50XG4gKi9cbmNvbnN0IEFwcCA9ICgpID0+IChcbiAgPGRpdiBjbGFzc05hbWU9J2V4YW1wbGUtYXBwJz5cbiAgICA8UG90aSBtaW49ezF9XG4gICAgICAgICAgbWF4PXs3fVxuICAgICAgICAgIHN0ZXA9ey41fVxuICAgICAgICAgIGRlZmF1bHRWYWx1ZT17M31cbiAgICAgICAgICBuYW1lPSdleGFtcGxlLTEnPiBFeGFtcGxlIDEgPC9Qb3RpPlxuICA8L2Rpdj5cbilcblxuZXhwb3J0IGRlZmF1bHQgQXBwXG4iXX0=",
+    "source": "'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _potentiometer = require('./components/potentiometer');\n\nvar _potentiometer2 = _interopRequireDefault(_potentiometer);\n\nfunction _interopRequireDefault(obj) {\n  return obj && obj.__esModule ? obj : { default: obj };\n}\n\n/**\n * a simple App that connects to a Store\n * the App is called with a `state` and an `updtate` function\n * @param  {Object} state - the app state\n * @return {HTMLElement} returns a rendered React component\n */\n/**\n * @module app\n * @author Gregor Adams <greg@pixelass.com>\n */\n\nvar App = function App(state, update) {\n\n  /**\n   * a simple change handler. Calls an update function to set the state\n   * in the Store\n   * @param  {Event} e - the change event\n   * @return {HTMLElement} returns a rendered React component\n   */\n  var handleChange = function handleChange(e) {\n    update({ value: e.target.value });\n  };\n\n  return _react2.default.createElement('div', { className: 'example-app' }, _react2.default.createElement(_potentiometer2.default, { min: 1,\n    max: 7,\n    step: .5,\n    value: state.value || 5,\n    onChange: handleChange,\n    name: 'example-1' }, ' Example 1 '));\n};\n\nexports.default = App;\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7QUFLQTs7OztBQUNBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBU0EsSUFBTSxNQUFNLFNBQU4sQUFBTSxJQUFDLEFBQUQsT0FBUSxBQUFSLFFBQW1CLEFBUTdCOzs7Ozs7OztNQUFNLGVBQWUsU0FBZixBQUFlLGFBQUMsQUFBRCxHQUFPLEFBQzFCO1dBQU8sRUFBQyxPQUFNLEVBQUUsQUFBRixPQUFTLEFBQWhCLEFBQVAsQUFDRDtBQUZELEFBSUE7O1NBQ0UsZ0JBQUEsY0FBQSxTQUFLLFdBQVUsQUFBZixBQUNFLGlDQUFBLDhCQUFBLFdBQU0sS0FBSyxBQUFYLEFBQ007U0FBSyxBQURYLEFBRU07VUFBTSxBQUZaLEFBR007V0FBTyxNQUFNLEFBQU4sU0FBZSxBQUg1QixBQUlNO2NBQVUsQUFKaEIsQUFLTTtVQUFLLEFBTFgsZUFBQSxBQURGLEFBREYsQUFVRDtBQXRCRDs7a0JBd0JlLEEiLCJmaWxlIjoiYXBwLmpzIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBAbW9kdWxlIGFwcFxuICogQGF1dGhvciBHcmVnb3IgQWRhbXMgPGdyZWdAcGl4ZWxhc3MuY29tPlxuICovXG5cbmltcG9ydCBSZWFjdCBmcm9tICdyZWFjdCdcbmltcG9ydCBQb3RpIGZyb20gJy4vY29tcG9uZW50cy9wb3RlbnRpb21ldGVyJ1xuXG5cbi8qKlxuICogYSBzaW1wbGUgQXBwIHRoYXQgY29ubmVjdHMgdG8gYSBTdG9yZVxuICogdGhlIEFwcCBpcyBjYWxsZWQgd2l0aCBhIGBzdGF0ZWAgYW5kIGFuIGB1cGR0YXRlYCBmdW5jdGlvblxuICogQHBhcmFtICB7T2JqZWN0fSBzdGF0ZSAtIHRoZSBhcHAgc3RhdGVcbiAqIEByZXR1cm4ge0hUTUxFbGVtZW50fSByZXR1cm5zIGEgcmVuZGVyZWQgUmVhY3QgY29tcG9uZW50XG4gKi9cbmNvbnN0IEFwcCA9IChzdGF0ZSwgdXBkYXRlKSA9PiB7XG5cbiAgLyoqXG4gICAqIGEgc2ltcGxlIGNoYW5nZSBoYW5kbGVyLiBDYWxscyBhbiB1cGRhdGUgZnVuY3Rpb24gdG8gc2V0IHRoZSBzdGF0ZVxuICAgKiBpbiB0aGUgU3RvcmVcbiAgICogQHBhcmFtICB7RXZlbnR9IGUgLSB0aGUgY2hhbmdlIGV2ZW50XG4gICAqIEByZXR1cm4ge0hUTUxFbGVtZW50fSByZXR1cm5zIGEgcmVuZGVyZWQgUmVhY3QgY29tcG9uZW50XG4gICAqL1xuICBjb25zdCBoYW5kbGVDaGFuZ2UgPSAoZSkgPT4ge1xuICAgIHVwZGF0ZSh7dmFsdWU6ZS50YXJnZXQudmFsdWV9KVxuICB9XG5cbiAgcmV0dXJuIChcbiAgICA8ZGl2IGNsYXNzTmFtZT0nZXhhbXBsZS1hcHAnPlxuICAgICAgPFBvdGkgbWluPXsxfVxuICAgICAgICAgICAgbWF4PXs3fVxuICAgICAgICAgICAgc3RlcD17LjV9XG4gICAgICAgICAgICB2YWx1ZT17c3RhdGUudmFsdWUgfHwgNX1cbiAgICAgICAgICAgIG9uQ2hhbmdlPXtoYW5kbGVDaGFuZ2V9XG4gICAgICAgICAgICBuYW1lPSdleGFtcGxlLTEnPiBFeGFtcGxlIDEgPC9Qb3RpPlxuICAgIDwvZGl2PlxuICApXG59XG5cbmV4cG9ydCBkZWZhdWx0IEFwcFxuIl19",
     "deps": {
-      "react": 314,
-      "./components/potentiometer": 318
+      "./components/potentiometer": 318,
+      "react": 314
     },
-    "hash": "64a7a9a937998a8cb96d05e67c2a74d4"
+    "hash": "bcb9f4f3f8b47f40625ff5ae9064b69c"
   },
   "317": {
     "id": 317,
@@ -3742,10 +3742,10 @@ require("./browser.js", entryId$$);
     "file": "/Users/pixelass/Workspace/netmag/poti-tutorial/src/browser.js",
     "source": "'use strict';\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactDom = require('react-dom');\n\nvar _reactDom2 = _interopRequireDefault(_reactDom);\n\nvar _store = require('./services/store');\n\nvar _store2 = _interopRequireDefault(_store);\n\nvar _app = require('./app');\n\nvar _app2 = _interopRequireDefault(_app);\n\nfunction _interopRequireDefault(obj) {\n  return obj && obj.__esModule ? obj : { default: obj };\n}\n\n/* global document */\n\nvar mountPoint = document.getElementById('app');\n_reactDom2.default.render(_react2.default.createElement(_store2.default, { connect: _app2.default }), mountPoint);\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImJyb3dzZXIuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFFQTs7OztBQUNBOzs7O0FBQ0E7Ozs7QUFDQTs7Ozs7Ozs7OztBQUNBLElBQU0sYUFBYSxTQUFTLEFBQVQsZUFBd0IsQUFBeEIsQUFBbkI7QUFDQSxtQkFBUyxBQUFULE9BQWdCLGlEQUFPLGVBQVAsQUFBaEIsWUFBd0MsQUFBeEMiLCJmaWxlIjoiYnJvd3Nlci5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8qIGdsb2JhbCBkb2N1bWVudCAqL1xuXG5pbXBvcnQgUmVhY3QgZnJvbSAncmVhY3QnXG5pbXBvcnQgUmVhY3RET00gZnJvbSAncmVhY3QtZG9tJ1xuaW1wb3J0IFN0b3JlIGZyb20gJy4vc2VydmljZXMvc3RvcmUnXG5pbXBvcnQgQXBwIGZyb20gJy4vYXBwJ1xuY29uc3QgbW91bnRQb2ludCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdhcHAnKVxuUmVhY3RET00ucmVuZGVyKDxTdG9yZSBjb25uZWN0PXtBcHB9Lz4sIG1vdW50UG9pbnQpXG4iXX0=",
     "deps": {
-      "./app": 316,
       "react": 314,
       "react-dom": 166,
-      "./services/store": 319
+      "./services/store": 319,
+      "./app": 316
     },
     "hash": "b464a8fe00c7487bc389383c50892781"
   },
@@ -3753,11 +3753,11 @@ require("./browser.js", entryId$$);
     "id": 318,
     "index": 318,
     "file": "/Users/pixelass/Workspace/netmag/poti-tutorial/src/components/potentiometer.js",
-    "source": "'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) {\n  return obj && obj.__esModule ? obj : { default: obj };\n}\n\n/**\n * a radial slider/knob UI component.\n * Based on an HTML `input[type=\"range\"]` element\n * @param  {Object} props -\n *        a collection of props used to define the component\n * @param {Node} [props.min=0] -\n *        min value\n * @param {Node} [props.max=100] -\n *        max value\n * @param {Node} [props.step=1] -\n *        step value\n * @param {Node} props.name -\n *        name attribute (for forms)\n * @param {Node} [props.defaultValue=50] -\n *        default value\n * @param {Node} props.children -\n *        one or more nested element(s) usually used to show\n *        a label text\n */\nvar Poti = function Poti(props) {\n  return _react2.default.createElement('label', { className: 'poti' }, props.children, _react2.default.createElement('input', { type: 'range',\n    min: props.min,\n    max: props.max,\n    step: props.step,\n    name: props.name,\n    defaultValue: props.defaultValue }), ' ');\n}; /**\n    * Potentiometers are commonly used to control electrical devices such\n    * as volume controls on audio equipment. (wikipedia)\n    * @module potentiometer\n    * @author Gregor Adams <greg@pixelass.com>\n    */\n\nPoti.propTypes = {\n  min: _react.PropTypes.number,\n  max: _react.PropTypes.number,\n  step: _react.PropTypes.number,\n  defaultValue: _react.PropTypes.number,\n  name: _react.PropTypes.string,\n  children: _react.PropTypes.node\n};\n\nPoti.defaultProps = {\n  min: 0,\n  max: 100,\n  step: 1,\n  defaultValue: 50\n};\n\nexports.default = Poti;\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBvdGVudGlvbWV0ZXIuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBT0E7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQXFCQSxJQUFNLE9BQU8sU0FBUCxBQUFPLEtBQUEsQUFBQyxPQUFEO1NBQ1gsZ0JBQUEsY0FBQSxXQUFPLFdBQVAsQUFBaUIsQUFDZCxnQkFESCxBQUNTLEFBQ1AsbURBQU8sTUFBUCxBQUFZLEFBQ0w7U0FBSyxNQURaLEFBQ2tCLEFBQ1g7U0FBSyxNQUZaLEFBRWtCLEFBQ1g7VUFBTSxNQUhiLEFBR21CLEFBQ1o7VUFBTSxNQUpiLEFBSW1CLEFBQ1o7a0JBQWMsTUFQdkIsQUFFRSxBQUsyQixpQkFSbEIsQUFDWDtBQURGLEE7Ozs7Ozs7QUFXQSxLQUFBLEFBQUs7T0FDRSxpQkFEVSxBQUNBLEFBQ2Y7T0FBSyxpQkFGVSxBQUVBLEFBQ2Y7UUFBTSxpQkFIUyxBQUdDLEFBQ2hCO2dCQUFjLGlCQUpDLEFBSVMsQUFDeEI7UUFBTSxpQkFMUyxBQUtDLEFBQ2hCO1lBQVUsaUJBTlosQUFBaUIsQUFNSztBQU5MLEFBQ2Y7O0FBUUYsS0FBQSxBQUFLO09BQWUsQUFDYixBQUNMO09BRmtCLEFBRWIsQUFDTDtRQUhrQixBQUdaLEFBQ047Z0JBSkYsQUFBb0IsQUFJSjtBQUpJLEFBQ2xCOztrQkFNYSxBIiwiZmlsZSI6InBvdGVudGlvbWV0ZXIuanMiLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIFBvdGVudGlvbWV0ZXJzIGFyZSBjb21tb25seSB1c2VkIHRvIGNvbnRyb2wgZWxlY3RyaWNhbCBkZXZpY2VzIHN1Y2hcbiAqIGFzIHZvbHVtZSBjb250cm9scyBvbiBhdWRpbyBlcXVpcG1lbnQuICh3aWtpcGVkaWEpXG4gKiBAbW9kdWxlIHBvdGVudGlvbWV0ZXJcbiAqIEBhdXRob3IgR3JlZ29yIEFkYW1zIDxncmVnQHBpeGVsYXNzLmNvbT5cbiAqL1xuXG5pbXBvcnQgUmVhY3QsIHtQcm9wVHlwZXN9IGZyb20gJ3JlYWN0J1xuXG4vKipcbiAqIGEgcmFkaWFsIHNsaWRlci9rbm9iIFVJIGNvbXBvbmVudC5cbiAqIEJhc2VkIG9uIGFuIEhUTUwgYGlucHV0W3R5cGU9XCJyYW5nZVwiXWAgZWxlbWVudFxuICogQHBhcmFtICB7T2JqZWN0fSBwcm9wcyAtXG4gKiAgICAgICAgYSBjb2xsZWN0aW9uIG9mIHByb3BzIHVzZWQgdG8gZGVmaW5lIHRoZSBjb21wb25lbnRcbiAqIEBwYXJhbSB7Tm9kZX0gW3Byb3BzLm1pbj0wXSAtXG4gKiAgICAgICAgbWluIHZhbHVlXG4gKiBAcGFyYW0ge05vZGV9IFtwcm9wcy5tYXg9MTAwXSAtXG4gKiAgICAgICAgbWF4IHZhbHVlXG4gKiBAcGFyYW0ge05vZGV9IFtwcm9wcy5zdGVwPTFdIC1cbiAqICAgICAgICBzdGVwIHZhbHVlXG4gKiBAcGFyYW0ge05vZGV9IHByb3BzLm5hbWUgLVxuICogICAgICAgIG5hbWUgYXR0cmlidXRlIChmb3IgZm9ybXMpXG4gKiBAcGFyYW0ge05vZGV9IFtwcm9wcy5kZWZhdWx0VmFsdWU9NTBdIC1cbiAqICAgICAgICBkZWZhdWx0IHZhbHVlXG4gKiBAcGFyYW0ge05vZGV9IHByb3BzLmNoaWxkcmVuIC1cbiAqICAgICAgICBvbmUgb3IgbW9yZSBuZXN0ZWQgZWxlbWVudChzKSB1c3VhbGx5IHVzZWQgdG8gc2hvd1xuICogICAgICAgIGEgbGFiZWwgdGV4dFxuICovXG5jb25zdCBQb3RpID0gKHByb3BzKSA9PiAoXG4gIDxsYWJlbCBjbGFzc05hbWU9J3BvdGknPlxuICAgIHtwcm9wcy5jaGlsZHJlbn1cbiAgICA8aW5wdXQgdHlwZT0ncmFuZ2UnXG4gICAgICAgICAgIG1pbj17cHJvcHMubWlufVxuICAgICAgICAgICBtYXg9e3Byb3BzLm1heH1cbiAgICAgICAgICAgc3RlcD17cHJvcHMuc3RlcH1cbiAgICAgICAgICAgbmFtZT17cHJvcHMubmFtZX1cbiAgICAgICAgICAgZGVmYXVsdFZhbHVlPXtwcm9wcy5kZWZhdWx0VmFsdWV9Lz4gPC9sYWJlbD5cbilcblxuUG90aS5wcm9wVHlwZXMgPSB7XG4gIG1pbjogUHJvcFR5cGVzLm51bWJlcixcbiAgbWF4OiBQcm9wVHlwZXMubnVtYmVyLFxuICBzdGVwOiBQcm9wVHlwZXMubnVtYmVyLFxuICBkZWZhdWx0VmFsdWU6IFByb3BUeXBlcy5udW1iZXIsXG4gIG5hbWU6IFByb3BUeXBlcy5zdHJpbmcsXG4gIGNoaWxkcmVuOiBQcm9wVHlwZXMubm9kZSxcbn1cblxuUG90aS5kZWZhdWx0UHJvcHMgPSB7XG4gIG1pbjogMCxcbiAgbWF4OiAxMDAsXG4gIHN0ZXA6IDEsXG4gIGRlZmF1bHRWYWx1ZTogNTBcbn1cblxuZXhwb3J0IGRlZmF1bHQgUG90aVxuIl19",
+    "source": "'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) {\n  return obj && obj.__esModule ? obj : { default: obj };\n}\n\n/**\n * a radial slider/knob UI component.\n * Based on an HTML `input[type=\"range\"]` element\n * @param  {Object} props -\n *        a collection of props used to define the component\n * @param {Node} [props.min=0] -\n *        min value\n * @param {Node} [props.max=100] -\n *        max value\n * @param {Node} [props.step=1] -\n *        step value\n * @param {Node} props.name -\n *        name attribute (for forms)\n * @param {Node} [props.defaultValue=50] -\n *        default value\n * @param {Node} props.children -\n *        one or more nested element(s) usually used to show\n *        a label text\n */\nvar Poti = function Poti(props) {\n  return _react2.default.createElement('label', { className: 'poti' }, props.children, _react2.default.createElement('input', { type: 'range',\n    min: props.min,\n    max: props.max,\n    step: props.step,\n    name: props.name,\n    onChange: props.onChange,\n    defaultValue: props.defaultValue }), ' ');\n}; /**\n    * Potentiometers are commonly used to control electrical devices such\n    * as volume controls on audio equipment. (wikipedia)\n    * @module potentiometer\n    * @author Gregor Adams <greg@pixelass.com>\n    */\n\nPoti.propTypes = {\n  min: _react.PropTypes.number,\n  max: _react.PropTypes.number,\n  step: _react.PropTypes.number,\n  defaultValue: _react.PropTypes.number,\n  name: _react.PropTypes.string,\n  children: _react.PropTypes.node,\n  onChange: _react.PropTypes.func\n};\n\nPoti.defaultProps = {\n  min: 0,\n  max: 100,\n  step: 1,\n  defaultValue: 50\n};\n\nexports.default = Poti;\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBvdGVudGlvbWV0ZXIuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBT0E7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQXFCQSxJQUFNLE9BQU8sU0FBUCxBQUFPLEtBQUEsQUFBQyxPQUFEO1NBQ1gsZ0JBQUEsY0FBQSxXQUFPLFdBQVAsQUFBaUIsQUFDZCxnQkFESCxBQUNTLEFBQ1AsbURBQU8sTUFBUCxBQUFZLEFBQ0w7U0FBSyxNQURaLEFBQ2tCLEFBQ1g7U0FBSyxNQUZaLEFBRWtCLEFBQ1g7VUFBTSxNQUhiLEFBR21CLEFBQ1o7VUFBTSxNQUpiLEFBSW1CLEFBQ1o7Y0FBVSxNQUxqQixBQUt1QixBQUNoQjtrQkFBYyxNQVJ2QixBQUVFLEFBTTJCLGlCQVRsQixBQUNYO0FBREYsQTs7Ozs7OztBQVlBLEtBQUEsQUFBSztPQUNFLGlCQURVLEFBQ0EsQUFDZjtPQUFLLGlCQUZVLEFBRUEsQUFDZjtRQUFNLGlCQUhTLEFBR0MsQUFDaEI7Z0JBQWMsaUJBSkMsQUFJUyxBQUN4QjtRQUFNLGlCQUxTLEFBS0MsQUFDaEI7WUFBVSxpQkFOSyxBQU1LLEFBQ3BCO1lBQVUsaUJBUFosQUFBaUIsQUFPSztBQVBMLEFBQ2Y7O0FBU0YsS0FBQSxBQUFLO09BQWUsQUFDYixBQUNMO09BRmtCLEFBRWIsQUFDTDtRQUhrQixBQUdaLEFBQ047Z0JBSkYsQUFBb0IsQUFJSjtBQUpJLEFBQ2xCOztrQkFNYSxBIiwiZmlsZSI6InBvdGVudGlvbWV0ZXIuanMiLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIFBvdGVudGlvbWV0ZXJzIGFyZSBjb21tb25seSB1c2VkIHRvIGNvbnRyb2wgZWxlY3RyaWNhbCBkZXZpY2VzIHN1Y2hcbiAqIGFzIHZvbHVtZSBjb250cm9scyBvbiBhdWRpbyBlcXVpcG1lbnQuICh3aWtpcGVkaWEpXG4gKiBAbW9kdWxlIHBvdGVudGlvbWV0ZXJcbiAqIEBhdXRob3IgR3JlZ29yIEFkYW1zIDxncmVnQHBpeGVsYXNzLmNvbT5cbiAqL1xuXG5pbXBvcnQgUmVhY3QsIHtQcm9wVHlwZXN9IGZyb20gJ3JlYWN0J1xuXG4vKipcbiAqIGEgcmFkaWFsIHNsaWRlci9rbm9iIFVJIGNvbXBvbmVudC5cbiAqIEJhc2VkIG9uIGFuIEhUTUwgYGlucHV0W3R5cGU9XCJyYW5nZVwiXWAgZWxlbWVudFxuICogQHBhcmFtICB7T2JqZWN0fSBwcm9wcyAtXG4gKiAgICAgICAgYSBjb2xsZWN0aW9uIG9mIHByb3BzIHVzZWQgdG8gZGVmaW5lIHRoZSBjb21wb25lbnRcbiAqIEBwYXJhbSB7Tm9kZX0gW3Byb3BzLm1pbj0wXSAtXG4gKiAgICAgICAgbWluIHZhbHVlXG4gKiBAcGFyYW0ge05vZGV9IFtwcm9wcy5tYXg9MTAwXSAtXG4gKiAgICAgICAgbWF4IHZhbHVlXG4gKiBAcGFyYW0ge05vZGV9IFtwcm9wcy5zdGVwPTFdIC1cbiAqICAgICAgICBzdGVwIHZhbHVlXG4gKiBAcGFyYW0ge05vZGV9IHByb3BzLm5hbWUgLVxuICogICAgICAgIG5hbWUgYXR0cmlidXRlIChmb3IgZm9ybXMpXG4gKiBAcGFyYW0ge05vZGV9IFtwcm9wcy5kZWZhdWx0VmFsdWU9NTBdIC1cbiAqICAgICAgICBkZWZhdWx0IHZhbHVlXG4gKiBAcGFyYW0ge05vZGV9IHByb3BzLmNoaWxkcmVuIC1cbiAqICAgICAgICBvbmUgb3IgbW9yZSBuZXN0ZWQgZWxlbWVudChzKSB1c3VhbGx5IHVzZWQgdG8gc2hvd1xuICogICAgICAgIGEgbGFiZWwgdGV4dFxuICovXG5jb25zdCBQb3RpID0gKHByb3BzKSA9PiAoXG4gIDxsYWJlbCBjbGFzc05hbWU9J3BvdGknPlxuICAgIHtwcm9wcy5jaGlsZHJlbn1cbiAgICA8aW5wdXQgdHlwZT0ncmFuZ2UnXG4gICAgICAgICAgIG1pbj17cHJvcHMubWlufVxuICAgICAgICAgICBtYXg9e3Byb3BzLm1heH1cbiAgICAgICAgICAgc3RlcD17cHJvcHMuc3RlcH1cbiAgICAgICAgICAgbmFtZT17cHJvcHMubmFtZX1cbiAgICAgICAgICAgb25DaGFuZ2U9e3Byb3BzLm9uQ2hhbmdlfVxuICAgICAgICAgICBkZWZhdWx0VmFsdWU9e3Byb3BzLmRlZmF1bHRWYWx1ZX0vPiA8L2xhYmVsPlxuKVxuXG5Qb3RpLnByb3BUeXBlcyA9IHtcbiAgbWluOiBQcm9wVHlwZXMubnVtYmVyLFxuICBtYXg6IFByb3BUeXBlcy5udW1iZXIsXG4gIHN0ZXA6IFByb3BUeXBlcy5udW1iZXIsXG4gIGRlZmF1bHRWYWx1ZTogUHJvcFR5cGVzLm51bWJlcixcbiAgbmFtZTogUHJvcFR5cGVzLnN0cmluZyxcbiAgY2hpbGRyZW46IFByb3BUeXBlcy5ub2RlLFxuICBvbkNoYW5nZTogUHJvcFR5cGVzLmZ1bmNcbn1cblxuUG90aS5kZWZhdWx0UHJvcHMgPSB7XG4gIG1pbjogMCxcbiAgbWF4OiAxMDAsXG4gIHN0ZXA6IDEsXG4gIGRlZmF1bHRWYWx1ZTogNTBcbn1cblxuZXhwb3J0IGRlZmF1bHQgUG90aVxuIl19",
     "deps": {
       "react": 314
     },
-    "hash": "0237580bf1163c8b2216caae2c11aef7"
+    "hash": "a818e839c0e76b27fc75c1830a24c8e4"
   },
   "319": {
     "id": 319,

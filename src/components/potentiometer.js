@@ -34,6 +34,7 @@ const Poti = (props) => (
            max={props.max}
            step={props.step}
            name={props.name}
+           onChange={props.onChange}
            defaultValue={props.defaultValue}/> </label>
 )
 
@@ -44,6 +45,7 @@ Poti.propTypes = {
   defaultValue: PropTypes.number,
   name: PropTypes.string,
   children: PropTypes.node,
+  onChange: PropTypes.func
 }
 
 Poti.defaultProps = {
