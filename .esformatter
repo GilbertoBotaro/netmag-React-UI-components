@@ -1,0 +1,57 @@
+{
+  "esformatter": {
+    "allowShebang": true
+  },
+ "plugins": [
+   "esformatter-quotes",
+   "esformatter-var-each",
+   "esformatter-parseint",
+   "esformatter-braces",
+   "esformatter-literal-notation",
+   "esformatter-dot-notation",
+   "esformatter-semicolon-first",
+   "esformatter-jsx"
+ ],
+ "quotes": {
+    "type": "single"
+  },
+  "jsx": {
+    "formatJSX": true,
+    "attrsOnSameLineAsTag": false,
+    "maxAttrsOnTag": 2,
+    "firstAttributeOnSameLine": true,
+    "formatJSXExpressions": true,
+    "JSXExpressionsSingleLine": true,
+    "alignWithFirstAttribute": true,
+    "spaceInJSXExpressionContainers": "",
+    "removeSpaceBeforeClosingJSX": true,
+    "htmlOptions": {
+      "brace_style": "collapse",
+      "indent_char": " ",
+      "indent_size": 2,
+      "max_preserve_newlines": 1,
+      "preserve_newlines": false,
+      "wrap_line_length": 70
+    }
+  },
+  "indent" : {
+    "value": "  "
+  },
+  "lineBreak" : {
+    "value" : "\n",
+    "before" : {
+      "EndOfFile" : 1
+    },
+    "after" : {}
+  },
+  "whiteSpace" : {
+    "value" : " ",
+    "removeTrailing" : 1,
+    "before" : {
+      "ModuleSpecifierClosingBrace": 0
+    },
+    "after" : {
+      "ModuleSpecifierOpeningBrace": 0
+    }
+  }
+}
