@@ -14,7 +14,11 @@ import Poti from './components/potentiometer'
  */
 const App = () => (
   <div className='example-app'>
-    <Poti> Example 1 </Poti>
+    <Poti min={1}
+          max={7}
+          step={.5}
+          defaultValue={3}
+          name='example-1'> Example 1 </Poti>
   </div>
 )
 
