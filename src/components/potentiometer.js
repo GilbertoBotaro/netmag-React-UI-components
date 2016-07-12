@@ -6,7 +6,7 @@
  */
 
 import React, {PropTypes} from 'react'
-
+import Marker from './potentiometer-marker'
 
 /**
  * a radial slider/knob UI component.
@@ -57,13 +57,9 @@ const Poti = (props) => {
 
     return arr.map((marker, index) => {
       const val = Math.round((value - min) / step)
-      const selected = val === index
-      const style = {
-        color: (selected ? 'red' : 'black')
-      }
-      return <span key={index}
-                   className='marker'
-                   style={style}>{marker}</span>
+      return <Marker key={index}
+                     selected={val === index}
+                     label={marker}/>
     })
   }
   return (
