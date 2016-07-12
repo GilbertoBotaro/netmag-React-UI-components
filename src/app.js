@@ -22,7 +22,9 @@ const App = (state, update) => {
    * @return {HTMLElement} returns a rendered React component
    */
   const handleChange = (e) => {
-    update({value:e.target.value})
+    update({
+      value: e.target.value
+    })
   }
 
   return (
@@ -32,7 +34,8 @@ const App = (state, update) => {
             step={.5}
             value={state.value || 5}
             onChange={handleChange}
-            name='example-1'> Example 1 </Poti>
+            name='example-1'>
+      Example 1 </Poti>
     </div>
   )
 }
