@@ -4,6 +4,7 @@
  */
 
 import React, {PropTypes} from 'react'
+import classnames from 'classnames'
 
 /**
  * absolute center styles
@@ -30,19 +31,19 @@ const absoluteCenter = {
 const Marker = (props) => {
   const {fullAngle, radius, steps, index, label, selected, rest} = props
   const baseAngle = fullAngle / steps
-  const maybeSelected = {
-    color: (selected ? 'red' : 'black')
-  }
   const rotation = Object.assign({
     transform: `rotate(${baseAngle * index + rest}deg) translateY(calc(${radius}px - .5em))`
   }, absoluteCenter)
   const revRotation = Object.assign({
     transform: `translate(-50%,-50%) rotate(${(baseAngle * index + rest) * -1}deg)`
   }, absoluteCenter)
+  const classes = classnames('marker', {
+    selected
+  })
   return (
-    <div className='marker' style={rotation}>
+    <div className={classes} style={rotation}>
       <div style={revRotation}>
-        <div className='marker-inner' style={maybeSelected}>
+        <div className='marker-inner'>
           {label}
         </div>
       </div>

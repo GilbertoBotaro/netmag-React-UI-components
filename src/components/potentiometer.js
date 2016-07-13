@@ -6,6 +6,7 @@
  */
 
 import React, {PropTypes} from 'react'
+import classnames from 'classnames'
 import Marker from './potentiometer-marker'
 import Knob from './potentiometer-knob'
 
@@ -43,7 +44,7 @@ const staticStyles = {
  *        a label text
  */
 const Poti = (props) => {
-  const {markers, min, max, step, size, value, onChange, name, fullAngle} = props
+  const {markers, min, max, step, size, value, onChange, name, fullAngle, className} = props
   const range = (max - min)
   const rest = (360 - fullAngle) / 2
   const baseAngle = fullAngle / range
@@ -88,14 +89,17 @@ const Poti = (props) => {
     })
   }
 
+  const handleChange = (e) => onChange(e.target.value)
+
   const knobWrapperStyle = Object.assign({
     fontSize: size / 2,
     height: size,
     width: size
   }, staticStyles.knobWrapper)
 
+  const classes = classnames('poti', className)
   return (
-    <label className='poti'>
+    <label className={classes}>
       <div className='knob-wrapper' style={knobWrapperStyle}>
         <Knob rotation={rotation}/>
         <div className='markers' style={staticStyles.markers}>
@@ -108,7 +112,7 @@ const Poti = (props) => {
              max={max}
              step={step}
              name={name}
-             onChange={onChange}
+             onChange={handleChange}
              value={Number(value)}/>
     </label>
   )
@@ -120,6 +124,7 @@ Poti.propTypes = {
   step: PropTypes.number,
   value: PropTypes.number,
   name: PropTypes.string,
+  className: PropTypes.string,
   children: PropTypes.node,
   fullAngle: PropTypes.number,
   size: PropTypes.number,

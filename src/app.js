@@ -6,46 +6,122 @@
 import React from 'react'
 import Poti from './components/potentiometer'
 
+/**
+ * helper to return the days of each month
+ * @type {Object}
+ */
+const daysPerMonth = {
+  1: 31,
+  2: 28,
+  3: 31,
+  4: 30,
+  5: 31,
+  6: 30,
+  7: 31,
+  8: 31,
+  9: 30,
+  10: 31,
+  11: 30,
+  12: 31
+}
 
 /**
  * a simple App that connects to a Store
  * the App is called with a `state` and an `updtate` function
  * @param  {Object} state - the app state
+ * @param  {Function} update - a function to update the state
  * @return {HTMLElement} returns a rendered React component
  */
 const App = (state, update) => {
-
   /**
-   * a simple change handler. Calls an update function to set the state
-   * in the Store
+   * handle the change events of the component and
+   * updates the global store
    * @param  {Event} e - the change event
-   * @return {HTMLElement} returns a rendered React component
    */
-  const handleChange = (key, e) => {
+  const handleChange = (key, value) => {
     update({
-      [key]: e.target.value
+      [key]: Number(value)
     })
   }
 
+  const localState = {}
+  if (typeof state.flatPoti3 !== 'undefined') {
+    localState.flatPoti2Max = daysPerMonth[state.flatPoti3]
+  }
+
+  /* return the App */
   return (
     <div className='example-app'>
-      <Poti min={-1}
-            max={1}
-            step={.5}
-            value={Number(state['example-1']) || 0}
-            onChange={handleChange.bind(this, 'example-1')}
-            name='example-1'>
-        Example 1
+      <Poti className='default'
+            min={0}
+            step={1}
+            max={10}
+            value={typeof state.defaultPoti === 'number' ? state.defaultPoti : 5}
+            onChange={handleChange.bind(this, 'defaultPoti')}>
+        <div>
+          Default
+        </div>
       </Poti>
-      <Poti min={-1}
+      <Poti className='digital'
+            min={-1}
             max={1}
-            step={.5}
+            step={.2}
+            fullAngle={180}
             markers={['-1', '0', '1']}
-            value={Number(state['example-2']) || 0}
-            onChange={handleChange.bind(this, 'example-2')}
-            name='example-2'>
-        Example 2
+            size={100}
+            value={typeof state.digitalPoti === 'number' ? state.digitalPoti : 1}
+            onChange={handleChange.bind(this, 'digitalPoti')}>
+        <div>
+          Frequency
+        </div>
       </Poti>
+      <Poti className='digital'
+            min={1}
+            max={7}
+            step={1}
+            fullAngle={180}
+            markers={['lo', 'mid', 'hi']}
+            size={150}
+            value={typeof state.digitalPoti2 === 'number' ? state.digitalPoti2 : 1}
+            onChange={handleChange.bind(this, 'digitalPoti2')}>
+        <div>
+          output
+        </div>
+      </Poti>
+      <Poti className='digital'
+            min={0}
+            max={127}
+            step={127 / 20}
+            fullAngle={300}
+            markers={['0', '127']}
+            size={150}
+            value={typeof state.digitalPoti3 === 'number' ? state.digitalPoti3 : 1}
+            onChange={handleChange.bind(this, 'digitalPoti3')}>
+        <div>
+          Gain
+        </div>
+      </Poti>
+      <div className='flat-double'>
+        <Poti className='flat big'
+              min={1}
+              max={localState.flatPoti2Max || 31}
+              step={1}
+              fullAngle={360 - 360 / ((localState.flatPoti2Max) || 31)}
+              size={300}
+              value={typeof state.flatPoti2 === 'number' ? state.flatPoti2 : 1}
+              onChange={handleChange.bind(this, 'flatPoti2')}>
+        </Poti>
+        <Poti className='flat'
+              min={1}
+              max={12}
+              step={1}
+              markers={['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sept', 'oct', 'nov', 'dec']}
+              fullAngle={360 - 360 / 12}
+              size={200}
+              value={typeof state.flatPoti3 === 'number' ? state.flatPoti3 : 1}
+              onChange={handleChange.bind(this, 'flatPoti3')}>
+        </Poti>
+      </div>
     </div>
   )
 }

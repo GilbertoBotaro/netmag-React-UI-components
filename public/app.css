@@ -1,24 +1,24 @@
 .example-app {
-  display: -ms-flexbox;
   display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
   -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -ms-flex: 1;
   -webkit-flex: 1;
+  -ms-flex: 1;
   flex: 1;
-  -ms-flex-item-align: stretch;
   -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
   align-self: stretch;
-  -ms-flex-pack: center;
   -webkit-justify-content: center;
+  -ms-flex-pack: center;
   justify-content: center;
-  -ms-flex-line-pack: center;
   -webkit-align-content: center;
+  -ms-flex-line-pack: center;
   align-content: center;
-  -ms-flex-align: center;
   -webkit-align-items: center;
+  -ms-flex-align: center;
   align-items: center;
   background: #fff;
   color: #111;
@@ -29,4 +29,204 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.digital {
+  position: relative;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+  overflow: hidden;
+  border-radius: 2px;
+  font-size: 16px;
+  font-family: bpdotsbold;
+  text-transform: uppercase;
+  background: #111;
+  color: #fff;
+}
+
+.digital.focused {
+  color: #DF2623;
+}
+
+.digital input {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  width: 100%;
+}
+
+.digital .marker {
+  transition: opacity .2s linear;
+  opacity: 0.4;
+  color: #DF2623;
+  text-shadow: 1px 0 0 #000, -1px 0 0 #000, 0 1px 0 #000, 0 -1px 0 #000;
+}
+
+.digital .marker-indicator {
+  height: 5px;
+  width: 5px;
+  border-radius: 100%;
+  background: currentColor;
+  box-shadow: 0 0 0 1px #000, 0 0 0px 0px currentColor;
+}
+
+.digital .marker.selected {
+  opacity: 1;
+  text-shadow: 1px 0 0 #000, -1px 0 0 #000, 0 1px 0 #000, 0 -1px 0 #000,  -1px 0 2px #FF2825, 1px 0 2px #FF2825, 0 -1px 2px #FF2825, 0 1px 2px #FF2825;
+}
+
+.digital .marker.selected .marker-indicator {
+  box-shadow: 0 0 0 1px #000, 0 0 3px 2px currentColor;
+}
+
+.digital .knob {
+  border-width: 2px;
+  background-color: #222;
+  color: #000;
+}
+
+.digital .indicator {
+  color: transparent;
+}
+
+.digital .indicator:before {
+  content: '';
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  height: 5px;
+  width: 5px;
+  border-radius: 100%;
+  background: #DF2623;
+  box-shadow: 0 0 0 1px #000, 0 0 3px 2px #FF2825;
+}
+
+.flat {
+  position: relative;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 1.5em;
+  margin: 10px;
+  overflow: hidden;
+  border-radius: 2px;
+  font-size: 16px;
+  text-transform: uppercase;
+  background-color: #536DFE;
+  color: #fff;
+}
+
+.flat.focused {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+.flat.focused .indicator {
+  opacity: .8;
+}
+
+.flat input {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  width: 100%;
+}
+
+.flat .marker .marker-inner {
+  font-size: 12px;
+}
+
+.flat .marker.selected .marker-inner {}
+
+.flat .knob {
+  font-size: 200px;
+  border-width: 0;
+  color: #E91E63;
+}
+
+.flat.big .knob {
+  font-size: 300px;
+}
+
+.flat .indicator {
+  visibility: hidden;
+  font-size: 16px;
+  opacity: .5;
+}
+
+.flat .indicator:before {
+  visibility: visible;
+  content: '';
+  position: absolute;
+  bottom: -1em;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  height: 3em;
+  width: 3em;
+  border-radius: 100%;
+  background: currentCOlor;
+}
+
+.flat .indicator:after {
+  visibility: visible;
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: 1px;
+  background: currentCOlor;
+}
+
+.flat-double {
+  position: relative;
+  height: 400px;
+  width: 350px;
+  background-color: #536DFE;
+}
+
+.flat-double .flat {
+  visibility: hidden;
+  margin: 0;
+  padding: 20px;
+  background-color: transparent;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.flat-double .flat input,
+.flat-double .flat .knob-wrapper {
+  visibility: visible;
 }
