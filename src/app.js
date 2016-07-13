@@ -10,9 +10,9 @@ import Poti from './components/potentiometer'
  * helper to return the days of each month
  * @type {Object}
  */
-const daysPerMonth = {
+const daysPerMonth = (leap) => ({
   1: 31,
-  2: 28,
+  2: leap ? 29 : 28,
   3: 31,
   4: 30,
   5: 31,
@@ -23,7 +23,7 @@ const daysPerMonth = {
   10: 31,
   11: 30,
   12: 31
-}
+})
 
 /**
  * a simple App that connects to a Store
@@ -46,7 +46,8 @@ const App = (state, update) => {
 
   const localState = {}
   if (typeof state.flatPoti3 !== 'undefined') {
-    localState.flatPoti2Max = daysPerMonth[state.flatPoti3]
+    const leap = state.flatPoti4 === 2016 || state.flatPoti4 === 2020
+    localState.flatPoti2Max = daysPerMonth(leap)[state.flatPoti3]
   }
 
   /* return the App */
@@ -102,12 +103,13 @@ const App = (state, update) => {
         </div>
       </Poti>
       <div className='flat-double'>
+        <h2>{typeof state.flatPoti2 === 'number' ? state.flatPoti2 : 1}. {typeof state.flatPoti3 === 'number' ? state.flatPoti3 : 1}. {typeof state.flatPoti4 === 'number' ? state.flatPoti4 : 2015}</h2>
         <Poti className='flat big'
               min={1}
               max={localState.flatPoti2Max || 31}
               step={1}
               fullAngle={360 - 360 / ((localState.flatPoti2Max) || 31)}
-              size={300}
+              size={250}
               value={typeof state.flatPoti2 === 'number' ? state.flatPoti2 : 1}
               onChange={handleChange.bind(this, 'flatPoti2')}>
         </Poti>
@@ -117,9 +119,18 @@ const App = (state, update) => {
               step={1}
               markers={['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sept', 'oct', 'nov', 'dec']}
               fullAngle={360 - 360 / 12}
-              size={200}
+              size={180}
               value={typeof state.flatPoti3 === 'number' ? state.flatPoti3 : 1}
               onChange={handleChange.bind(this, 'flatPoti3')}>
+        </Poti>
+        <Poti className='flat small'
+              min={2015}
+              max={2023}
+              step={1}
+              fullAngle={360 - 360 / 8}
+              size={110}
+              value={typeof state.flatPoti4 === 'number' ? state.flatPoti4 : 2015}
+              onChange={handleChange.bind(this, 'flatPoti4')}>
         </Poti>
       </div>
     </div>

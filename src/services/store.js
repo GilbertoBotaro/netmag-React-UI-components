@@ -13,7 +13,6 @@ class Store extends Component {
    * @param  {Object} props - component props
    * @param  {Object} props.connect - React component to connect
    */
-
   constructor(props) {
     super(props)
     this.state = {}
@@ -22,17 +21,13 @@ class Store extends Component {
    * renders the connected component
    * @return {ReactComponent} returns a React component connected to the store
    */
-
   render() {
     return this.props.connect(this.state, this.setState.bind(this))
   }
 }
 
 Store.propTypes = {
-
-
   connect: PropTypes.func
 }
-
 
 export default Store
