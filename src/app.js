@@ -35,14 +35,17 @@ const App = (state, update) => {
             value={Number(state['example-1']) || 0}
             onChange={handleChange.bind(this, 'example-1')}
             name='example-1'>
-      Example 1 </Poti>
+        Example 1
+      </Poti>
       <Poti min={-1}
             max={1}
             step={.5}
             markers={['-1', '0', '1']}
             value={Number(state['example-2']) || 0}
             onChange={handleChange.bind(this, 'example-2')}
-            name='example-2'> Example 2 </Poti>
+            name='example-2'>
+        Example 2
+      </Poti>
     </div>
   )
 }

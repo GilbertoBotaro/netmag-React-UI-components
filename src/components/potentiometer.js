@@ -9,6 +9,23 @@ import React, {PropTypes} from 'react'
 import Marker from './potentiometer-marker'
 import Knob from './potentiometer-knob'
 
+
+const staticStyles = {
+  knobWrapper: {
+    height: 100,
+    width: 100,
+    fontSize: 50,
+    position: 'relative'
+  },
+  markers: {
+    fontSize: '1rem',
+    position: 'absolute',
+    left: '50%',
+    top: '50%'
+  }
+}
+
+
 /**
  * a radial slider/knob UI component.
  * Based on an HTML `input[type="range"]` element
@@ -29,7 +46,12 @@ import Knob from './potentiometer-knob'
  *        a label text
  */
 const Poti = (props) => {
-  const {markers, min, max, step, value, onChange, name} = props
+  const {markers, min, max, step, value, onChange, name, fullAngle} = props
+  const range = (max - min)
+  const rest = (360 - fullAngle) / 2
+  const baseAngle = fullAngle / range
+  const rotation = rest + (value - min) * baseAngle
+  const steps = Math.round(range / step)
 
   /**
    * a function to return the markers
@@ -46,7 +68,6 @@ const Poti = (props) => {
    * @return {Array} returns a list of markers
    */
   const getMarkers = () => {
-    const steps = Math.round((max - min) / step)
     const arr = []
     for (let i = 0; i <= steps; i++) {
       if (markers) {
@@ -60,16 +81,22 @@ const Poti = (props) => {
     return arr.map((marker, index) => {
       const val = Math.round((value - min) / step)
       return <Marker key={index}
+                     fullAngle={fullAngle}
+                     steps={steps}
+                     rest={rest}
+                     index={index}
                      selected={val === index}
                      label={marker}/>
     })
   }
+
   return (
     <label className='poti'>
-      <div className='knob-wrapper'>
-        <Knob rotation={value}/>
-        <div className='markers'>
-          {getMarkers()} </div>
+      <div className='knob-wrapper' style={staticStyles.knobWrapper}>
+        <Knob rotation={rotation}/>
+        <div className='markers' style={staticStyles.markers}>
+          {getMarkers()}
+        </div>
       </div>
       {props.children}
       <input type='range'
@@ -78,7 +105,8 @@ const Poti = (props) => {
              step={step}
              name={name}
              onChange={onChange}
-             value={Number(value)}/> </label>
+             value={Number(value)}/>
+    </label>
   )
 }
 
@@ -89,6 +117,7 @@ Poti.propTypes = {
   value: PropTypes.number,
   name: PropTypes.string,
   children: PropTypes.node,
+  fullAngle: PropTypes.number,
   markers: PropTypes.array,
   onChange: PropTypes.func
 }
@@ -97,6 +126,7 @@ Poti.defaultProps = {
   min: 0,
   max: 100,
   value: 50,
+  fullAngle: 300,
   step: 1
 }
 
