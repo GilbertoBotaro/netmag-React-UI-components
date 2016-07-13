@@ -16,7 +16,6 @@ const staticStyles = {
     left: '50%',
     height: '1em',
     width: '1em',
-    transform: 'translate(-50%,-50%)',
     borderRadius: '50%',
     borderStyle: 'solid'
   },
@@ -38,11 +37,12 @@ const staticStyles = {
  * @return {HTMLElement} returns a rendered React component
  */
 const Knob = (props) => {
-  return (<div className='knob' style={staticStyles.knob}>
-            {props.rotation}
-            <div className='indicator' style={staticStyles.indicator}/>
-          </div>
-  )
+  const knobStyle = Object.assign({
+    transform: `translate(-50%,-50%) rotate(${props.rotation}deg)`
+  }, staticStyles.knob)
+  return <div className='knob' style={knobStyle}>
+           <div className='indicator' style={staticStyles.indicator}/>
+         </div>
 }
 
 Knob.propTypes = {
